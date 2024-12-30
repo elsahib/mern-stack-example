@@ -379,3 +379,425 @@ export function MovementForm() {
     </div>
   );
 }
+
+// Driver Form Component
+export function DriverForm() {
+  const [form, setForm] = useState({
+    name: "",
+    license: "",
+    status: "available",
+    assignedVehicleId: ""
+  });
+  const [vehicles, setVehicles] = useState([]);
+  const [isNew, setIsNew] = useState(true);
+  const params = useParams();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    async function fetchData() {
+      // Fetch available vehicles for assignment
+      const vehiclesRes = await fetch("http://localhost:5050/vehicles");
+      setVehicles(await vehiclesRes.json());
+
+      if (params.id) {
+        setIsNew(false);
+        const driverRes = await fetch(`http://localhost:5050/drivers/${params.id}`);
+        const driver = await driverRes.json();
+        setForm(driver);
+      }
+    }
+    fetchData();
+  }, [params.id]);
+
+  function updateForm(value) {
+    return setForm((prev) => ({ ...prev, ...value }));
+  }
+
+  async function onSubmit(e) {
+    e.preventDefault();
+    try {
+      const url = isNew ? "http://localhost:5050/drivers" : `http://localhost:5050/drivers/${params.id}`;
+      const method = isNew ? "POST" : "PATCH";
+      const response = await fetch(url, {
+        method,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (!response.ok) throw new Error(response.statusText);
+      navigate("/drivers");
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  }
+
+  return (
+    <div className="p-4">
+      <h3 className="text-lg font-semibold mb-4">
+        {isNew ? "Add Driver" : "Edit Driver"}
+      </h3>
+      <form onSubmit={onSubmit} className="border rounded-lg p-4">
+        <div className="grid gap-4">
+          <div>
+            <label className="block text-sm font-medium mb-1">Name</label>
+            <input
+              type="text"
+              className="w-full p-2 border rounded"
+              value={form.name}
+              onChange={(e) => updateForm({ name: e.target.value })}
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-1">License Number</label>
+            <input
+              type="text"
+              className="w-full p-2 border rounded"
+              value={form.license}
+              onChange={(e) => updateForm({ license: e.target.value })}
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-1">Status</label>
+            <select
+              className="w-full p-2 border rounded"
+              value={form.status}
+              onChange={(e) => updateForm({ status: e.target.value })}
+            >
+              <option value="available">Available</option>
+              <option value="on_duty">On Duty</option>
+              <option value="off_duty">Off Duty</option>
+            </select>
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-1">Assigned Vehicle</label>
+            <select
+              className="w-full p-2 border rounded"
+              value={form.assignedVehicleId}
+              onChange={(e) => updateForm({ assignedVehicleId: e.target.value })}
+            >
+              <option value="">No Vehicle Assigned</option>
+              {vehicles.map((vehicle) => (
+                <option key={vehicle._id} value={vehicle._id}>
+                  {vehicle.model} - {vehicle.plate}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+        <button
+          type="submit"
+          className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+        >
+          {isNew ? "Add Driver" : "Update Driver"}
+        </button>
+      </form>
+    </div>
+  );
+}
+
+// Vehicle Form Component
+export function VehicleForm() {
+  const [form, setForm] = useState({
+    model: "",
+    plate: "",
+    capacity: "",
+    healthReport: {
+      lastInspection: "",
+      status: "operational",
+      issues: []
+    }
+  });
+  const [isNew, setIsNew] = useState(true);
+  const params = useParams();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    async function fetchData() {
+      if (params.id) {
+        setIsNew(false);
+        const response = await fetch(`http://localhost:5050/vehicles/${params.id}`);
+        const vehicle = await response.json();
+        setForm(vehicle);
+      }
+    }
+    fetchData();
+  }, [params.id]);
+
+  function updateForm(value) {
+    return setForm((prev) => {
+      if (value.healthReport) {
+        return {
+          ...prev,
+          healthReport: { ...prev.healthReport, ...value.healthReport }
+        };
+      }
+      return { ...prev, ...value };
+    });
+  }
+
+  async function onSubmit(e) {
+    e.preventDefault();
+    try {
+      const url = isNew ? "http://localhost:5050/vehicles" : `http://localhost:5050/vehicles/${params.id}`;
+      const method = isNew ? "POST" : "PATCH";
+      const response = await fetch(url, {
+        method,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (!response.ok) throw new Error(response.statusText);
+      navigate("/vehicles");
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  }
+
+  return (
+    <div className="p-4">
+      <h3 className="text-lg font-semibold mb-4">
+        {isNew ? "Add Vehicle" : "Edit Vehicle"}
+      </h3>
+      <form onSubmit={onSubmit} className="border rounded-lg p-4">
+        <div className="grid gap-4">
+          <div>
+            <label className="block text-sm font-medium mb-1">Model</label>
+            <input
+              type="text"
+              className="w-full p-2 border rounded"
+              value={form.model}
+              onChange={(e) => updateForm({ model: e.target.value })}
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-1">License Plate</label>
+            <input
+              type="text"
+              className="w-full p-2 border rounded"
+              value={form.plate}
+              onChange={(e) => updateForm({ plate: e.target.value })}
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-1">Passenger Capacity</label>
+            <input
+              type="number"
+              className="w-full p-2 border rounded"
+              value={form.capacity}
+              onChange={(e) => updateForm({ capacity: e.target.value })}
+            />
+          </div>
+          <div className="border-t pt-4">
+            <h4 className="font-medium mb-2">Health Report</h4>
+            <div className="grid gap-4">
+              <div>
+                <label className="block text-sm font-medium mb-1">Last Inspection</label>
+                <input
+                  type="date"
+                  className="w-full p-2 border rounded"
+                  value={form.healthReport.lastInspection}
+                  onChange={(e) => updateForm({ 
+                    healthReport: { lastInspection: e.target.value }
+                  })}
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium mb-1">Status</label>
+                <select
+                  className="w-full p-2 border rounded"
+                  value={form.healthReport.status}
+                  onChange={(e) => updateForm({ 
+                    healthReport: { status: e.target.value }
+                  })}
+                >
+                  <option value="operational">Operational</option>
+                  <option value="maintenance">Needs Maintenance</option>
+                  <option value="repair">Under Repair</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-medium mb-1">Issues</label>
+                <textarea
+                  className="w-full p-2 border rounded"
+                  value={form.healthReport.issues.join("\n")}
+                  onChange={(e) => updateForm({ 
+                    healthReport: { issues: e.target.value.split("\n").filter(Boolean) }
+                  })}
+                  placeholder="Enter issues (one per line)"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <button
+          type="submit"
+          className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+        >
+          {isNew ? "Add Vehicle" : "Update Vehicle"}
+        </button>
+      </form>
+    </div>
+  );
+}
+
+// Hotel Form Component
+export function HotelForm() {
+  const [form, setForm] = useState({
+    name: "",
+    address: "",
+    coordinates: {
+      latitude: "",
+      longitude: ""
+    },
+    contactInfo: {
+      phone: "",
+      email: "",
+      contactPerson: ""
+    }
+  });
+  const [isNew, setIsNew] = useState(true);
+  const params = useParams();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    async function fetchData() {
+      if (params.id) {
+        setIsNew(false);
+        const response = await fetch(`http://localhost:5050/hotels/${params.id}`);
+        const hotel = await response.json();
+        setForm(hotel);
+      }
+    }
+    fetchData();
+  }, [params.id]);
+
+  function updateForm(value) {
+    return setForm((prev) => {
+      if (value.coordinates) {
+        return {
+          ...prev,
+          coordinates: { ...prev.coordinates, ...value.coordinates }
+        };
+      }
+      if (value.contactInfo) {
+        return {
+          ...prev,
+          contactInfo: { ...prev.contactInfo, ...value.contactInfo }
+        };
+      }
+      return { ...prev, ...value };
+    });
+  }
+
+  async function onSubmit(e) {
+    e.preventDefault();
+    try {
+      const url = isNew ? "http://localhost:5050/hotels" : `http://localhost:5050/hotels/${params.id}`;
+      const method = isNew ? "POST" : "PATCH";
+      const response = await fetch(url, {
+        method,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (!response.ok) throw new Error(response.statusText);
+      navigate("/hotels");
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  }
+
+  return (
+    <div className="p-4">
+      <h3 className="text-lg font-semibold mb-4">
+        {isNew ? "Add Hotel" : "Edit Hotel"}
+      </h3>
+      <form onSubmit={onSubmit} className="border rounded-lg p-4">
+        <div className="grid gap-4">
+          <div>
+            <label className="block text-sm font-medium mb-1">Hotel Name</label>
+            <input
+              type="text"
+              className="w-full p-2 border rounded"
+              value={form.name}
+              onChange={(e) => updateForm({ name: e.target.value })}
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-1">Address</label>
+            <textarea
+              className="w-full p-2 border rounded"
+              value={form.address}
+              onChange={(e) => updateForm({ address: e.target.value })}
+            />
+          </div>
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium mb-1">Latitude</label>
+              <input
+                type="text"
+                className="w-full p-2 border rounded"
+                value={form.coordinates.latitude}
+                onChange={(e) => updateForm({ 
+                  coordinates: { latitude: e.target.value }
+                })}
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium mb-1">Longitude</label>
+              <input
+                type="text"
+                className="w-full p-2 border rounded"
+                value={form.coordinates.longitude}
+                onChange={(e) => updateForm({ 
+                  coordinates: { longitude: e.target.value }
+                })}
+              />
+            </div>
+          </div>
+          <div className="border-t pt-4">
+            <h4 className="font-medium mb-2">Contact Information</h4>
+            <div className="grid gap-4">
+              <div>
+                <label className="block text-sm font-medium mb-1">Contact Person</label>
+                <input
+                  type="text"
+                  className="w-full p-2 border rounded"
+                  value={form.contactInfo.contactPerson}
+                  onChange={(e) => updateForm({ 
+                    contactInfo: { contactPerson: e.target.value }
+                  })}
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium mb-1">Phone</label>
+                <input
+                  type="tel"
+                  className="w-full p-2 border rounded"
+                  value={form.contactInfo.phone}
+                  onChange={(e) => updateForm({ 
+                    contactInfo: { phone: e.target.value }
+                  })}
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium mb-1">Email</label>
+                <input
+                  type="email"
+                  className="w-full p-2 border rounded"
+                  value={form.contactInfo.email}
+                  onChange={(e) => updateForm({ 
+                    contactInfo: { email: e.target.value }
+                  })}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <button
+          type="submit"
+          className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+        >
+          {isNew ? "Add Hotel" : "Update Hotel"}
+        </button>
+      </form>
+    </div>
+  );
+}
