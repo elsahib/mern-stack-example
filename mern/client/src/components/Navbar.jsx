@@ -11,7 +11,9 @@ export default function Navbar() {
         <NavLink to="/events">Events</NavLink>
         <NavLink to="/performers">Performers</NavLink>
         <NavLink to="/movements">Transportation</NavLink>
-
+        <NavLink to="/drivers">Drivers</NavLink>
+        <NavLink to="/vehicles">Vehicles</NavLink>
+        <NavLink to="/hotels">Hotels</NavLink>
       </nav>
     </div>
   );

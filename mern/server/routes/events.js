@@ -6,7 +6,7 @@ const router = express.Router();
 
 // Event Routes
 // GET all events with related information
-router.get("/events", async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     let collection = await db.collection("events");
     let results = await collection.aggregate([
@@ -35,7 +35,7 @@ router.get("/events", async (req, res) => {
 });
 
 // GET single event by id
-router.get("/events/:id", async (req, res) => {
+router.get("/:id", async (req, res) => {
   try {
     let collection = await db.collection("events");
     let query = { _id: new ObjectId(req.params.id) };
@@ -50,7 +50,7 @@ router.get("/events/:id", async (req, res) => {
 });
 
 // POST new event
-router.post("/events", async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     let newEvent = {
       name: req.body.name,
@@ -65,6 +65,29 @@ router.post("/events", async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).send("Error creating event");
+  }
+});
+
+// PATCH event by id
+router.patch("/:id", async (req, res) => {
+  try {
+    const query = { _id: new ObjectId(req.params.id) };
+    const updates = {
+      $set: {
+        name: req.body.name,
+        date: req.body.date,
+        performerIds: req.body.performerIds.map(id => new ObjectId(id)),
+        locationId: new ObjectId(req.body.locationId),
+        status: req.body.status
+      }
+    };
+
+    let collection = await db.collection("events");
+    let result = await collection.updateOne(query, updates);
+    res.status(200).json(result);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error updating event");
   }
 });
 

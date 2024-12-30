@@ -267,3 +267,240 @@ export function PerformerList() {
     </div>
   );
 }
+
+
+export function DriverList() {
+  const [drivers, setDrivers] = useState([]);
+
+  useEffect(() => {
+    async function fetchDrivers() {
+      const response = await fetch("http://localhost:5050/drivers");
+      const drivers = await response.json();
+      setDrivers(drivers);
+    }
+    fetchDrivers();
+  }, []);
+
+  async function deleteDriver(id) {
+    await fetch(`http://localhost:5050/drivers/${id}`, {
+      method: "DELETE",
+    });
+    setEvents(events.filter(event => event._id !== id));
+  }
+  return (
+    <div className="p-4">
+      <div className="flex justify-between items-center mb-4">
+        <h3 className="text-lg font-semibold">Events</h3>
+        <Link
+          to="/drivers/create"
+          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+        >
+          Create Driver
+        </Link>
+      </div>
+      <div className="border rounded-lg overflow-hidden">
+        <table className="min-w-full divide-y divide-gray-200">
+          <thead className="bg-gray-50">
+            <tr>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Name
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                License</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Assigned Vehicle
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Status
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Actions
+              </th>
+            </tr>
+          </thead>
+          <tbody className="bg-white divide-y divide-gray-200">
+            {drivers.map((driver) => (
+              <tr key={driver._id}>
+                <td className="px-6 py-4 whitespace-nowrap">{driver.name}</td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  {driver.license}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  {/* {driver.assignedVehicleId.plate || 'N/A'} */}
+                  {driver.assignedVehicleId && <span> - Plate: {driver.assignedVehicleId.plate}</span>}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">{driver.status}</td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  <div className="flex gap-2">
+                    <Link
+                      to={`/drivers/edit/${driver._id}`}
+                      className="px-3 py-1 bg-blue-100 text-blue-600 rounded hover:bg-blue-200"
+                    >
+                      Edit
+                    </Link>
+                    <button
+                      onClick={() => deleteDriver(driver._id)}
+                      className="px-3 py-1 bg-red-100 text-red-600 rounded hover:bg-red-200"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
+export function VehicleList() {
+  const [vehicles, setVehicles] = useState([]);
+
+  useEffect(() => {
+    async function fetchVehicles() {
+      const response = await fetch("http://localhost:5050/vehicles");
+      const vehicles = await response.json();
+      setVehicles(vehicles);
+    }
+    fetchVehicles();
+  }, []);
+
+  async function deleteVehicle(id) {
+    await fetch(`http://localhost:5050/vehicles/${id}`, {
+      method: "DELETE",
+    });
+    setVehicles(vehicles.filter(vehicle => vehicle._id !== id));
+  }
+
+  return (
+    <div className="p-4">
+      <div className="flex justify-between items-center mb-4">
+        <h3 className="text-lg font-semibold">Vehicles</h3>
+        <Link
+          to="/vehicles/create"
+          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+        >
+          Add Vehicle
+        </Link>
+      </div>
+      <div className="border rounded-lg overflow-hidden">
+        <table className="min-w-full divide-y divide-gray-200">
+          <thead className="bg-gray-50">
+            <tr>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Model</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Plate</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Capacity</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+            </tr>
+          </thead>
+          <tbody className="bg-white divide-y divide-gray-200">
+            {vehicles.map((vehicle) => (
+              <tr key={vehicle._id}>
+                <td className="px-6 py-4 whitespace-nowrap">{vehicle.model}</td>
+                <td className="px-6 py-4 whitespace-nowrap">{vehicle.plate}</td>
+                <td className="px-6 py-4 whitespace-nowrap">{vehicle.capacity}</td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  {vehicle.healthReport.status}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  <div className="flex gap-2">
+                    <Link
+                      to={`/vehicles/edit/${vehicle._id}`}
+                      className="px-3 py-1 bg-blue-100 text-blue-600 rounded hover:bg-blue-200"
+                    >
+                      Edit
+                    </Link>
+                    <button
+                      onClick={() => deleteVehicle(vehicle._id)}
+                      className="px-3 py-1 bg-red-100 text-red-600 rounded hover:bg-red-200"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
+export function HotelList() {
+  const [hotels, setHotels] = useState([]);
+
+  useEffect(() => {
+    async function fetchHotels() {
+      const response = await fetch("http://localhost:5050/hotels");
+      const hotels = await response.json();
+      setHotels(hotels);
+    }
+    fetchHotels();
+  }, []);
+
+  async function deleteHotel(id) {
+    await fetch(`http://localhost:5050/hotels/${id}`, {
+      method: "DELETE",
+    });
+    setHotels(hotels.filter(hotel => hotel._id !== id));
+  }
+
+  return (
+    <div className="p-4">
+      <div className="flex justify-between items-center mb-4">
+        <h3 className="text-lg font-semibold">Hotels</h3>
+        <Link
+          to="/hotels/create"
+          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+        >
+          Add Hotel
+        </Link>
+      </div>
+      <div className="border rounded-lg overflow-hidden">
+        <table className="min-w-full divide-y divide-gray-200">
+          <thead className="bg-gray-50">
+            <tr>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Address</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Contact Info</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Phone</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+            </tr>
+          </thead>
+          <tbody className="bg-white divide-y divide-gray-200">
+            {hotels.map((hotel) => (
+              <tr key={hotel._id}>
+                <td className="px-6 py-4 whitespace-nowrap">{hotel.name}</td>
+                <td className="px-6 py-4 whitespace-nowrap">{hotel.address}</td>
+                <td className="px-6 py-4 whitespace-nowrap">{hotel.contactInfo?.contactPerson}</td>
+                <td className="px-6 py-4 whitespace-nowrap">{hotel.contactInfo?.phone}</td>
+                <td className="px-6 py-4 whitespace-nowrap">{hotel.contactInfo?.email}</td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  <div className="flex gap-2">
+                    <Link
+                      to={`/hotels/edit/${hotel._id}`}
+                      className="px-3 py-1 bg-blue-100 text-blue-600 rounded hover:bg-blue-200"
+                    >
+                      Edit
+                    </Link>
+                    <button
+                      onClick={() => deleteHotel(hotel._id)}
+                      className="px-3 py-1 bg-red-100 text-red-600 rounded hover:bg-red-200"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}

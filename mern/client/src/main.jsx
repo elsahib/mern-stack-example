@@ -7,15 +7,13 @@ import {
 import App from "./App";
 import Record from "./components/Record";
 import RecordList from "./components/RecordList";
-import { EventForm, PerformerForm, MovementForm } from "./components/EventManRC"
-import { EventList, PerformerList, MovementList } from "./components/EventManList"
+import { EventForm, PerformerForm, MovementForm, DriverForm, VehicleForm, HotelForm } from "./components/EventManRC"
+import { EventList, PerformerList, MovementList, DriverList, VehicleList, HotelList } from "./components/EventManList"
 import "./index.css";
 
 const router = createBrowserRouter([
   {
-    path: "/",
-    element: <App />,
-    children: [
+    path: "/", element: <App />, children: [
       {
         path: "/",
         element: <RecordList />,
@@ -23,9 +21,7 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "/create",
-    element: <App />,
-    children: [
+    path: "/create", element: <App />, children: [
       {
         path: "/create",
         element: <Record />,
@@ -33,9 +29,7 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "/edit/:id",
-    element: <App />,
-    children: [
+    path: "/edit/:id", element: <App />, children: [
       {
         path: "/edit/:id",
         element: <Record />,
@@ -104,6 +98,60 @@ const router = createBrowserRouter([
   {
     path: "/movements/edit/:id", element: <App />, children: [
       { path: "/movements/edit/:id", element: <MovementForm /> }
+    ]
+  },
+
+  {
+    path: "/drivers", element: <App />, children: [
+      {
+        path: "/drivers", element: <DriverList />
+      }
+    ]
+  },
+  {
+    path: "/drivers/create", element: <App />, children: [
+      { path: "/drivers/create", element: <DriverForm /> }
+    ]
+  },
+  {
+    path: "/drivers/edit/:id", element: <App />, children: [
+      { path: "/drivers/edit/:id", element: <DriverForm /> }
+    ]
+  },
+  {
+    path: "/vehicles", element: <App />, children: [
+      {
+        path: "/vehicles",
+        element: <VehicleList />
+      }
+    ]
+  },
+  {
+    path: "/vehicles/create", element: <App />, children: [
+      { path: "/vehicles/create", element: <VehicleForm /> }
+    ]
+  },
+  {
+    path: "/vehicles/edit/:id", element: <App />, children: [
+      { path: "/vehicles/edit/:id", element: <VehicleForm /> }
+    ]
+  },
+  {
+    path: "/hotels", element: <App />, children: [
+      {
+        path: "/hotels",
+        element: <HotelList />
+      }
+    ]
+  },
+  {
+    path: "/hotels/create", element: <App />, children: [
+      { path: "/hotels/create", element: <HotelForm /> }
+    ]
+  },
+  {
+    path: "/hotels/edit/:id", element: <App />, children: [
+      { path: "/hotels/edit/:id", element: <HotelForm /> }
     ]
   },
 ]);
