@@ -1,10 +1,13 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar";
 
 const App = () => {
+  const location = useLocation();
+  const isLoginPage = location.pathname === '/';
+
   return (
-    <div className="w-full p-6">
-      <Navbar />
+    <div className="w-full min-h-screen p-6">
+      {!isLoginPage && <Navbar />}
       <Outlet />
     </div>
   );

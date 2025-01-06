@@ -1,10 +1,8 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom/client";
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App";
+import LoginForm from "./components/LoginForm";
 import Record from "./components/Record";
 import RecordList from "./components/RecordList";
 import { EventForm, PerformerForm, MovementForm, DriverForm, VehicleForm, HotelForm } from "./components/EventManRC"
@@ -13,17 +11,25 @@ import "./index.css";
 
 const router = createBrowserRouter([
   {
-    path: "/", element: <App />, children: [
+    path: "/",
+    element: <LoginForm />,
+  },
+  {
+    path: "/records",
+    element: <App />,
+    children: [
       {
-        path: "/",
+        path: "/records",
         element: <RecordList />,
       },
     ],
   },
   {
-    path: "/create", element: <App />, children: [
+    path: "/records/create",
+    element: <App />,
+    children: [
       {
-        path: "/create",
+        path: "/records/create",
         element: <Record />,
       },
     ],
