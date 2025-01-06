@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 
+const baseUrl = import.meta.env.VITE_BASE_URL;
 // Event Form Component
 export function EventForm() {
   const [form, setForm] = useState({
@@ -20,8 +21,8 @@ export function EventForm() {
     // Fetch performers and locations for dropdown
     async function fetchData() {
       const [performersRes, locationsRes] = await Promise.all([
-        fetch("http://localhost:5050/performers"),
-        fetch("http://localhost:5050/hotels")
+        fetch(`${baseUrl}/performers`),
+        fetch(`${baseUrl}/hotels`)
       ]);
       setPerformers(await performersRes.json());
       setLocations(await locationsRes.json());
@@ -29,7 +30,7 @@ export function EventForm() {
       // If editing, fetch event data
       if (params.id) {
         setIsNew(false);
-        const eventRes = await fetch(`http://localhost:5050/events/${params.id}`);
+        const eventRes = await fetch(`${baseUrl}/events/${params.id}`);
         const event = await eventRes.json();
         setForm(event);
       }
@@ -45,7 +46,7 @@ export function EventForm() {
     e.preventDefault();
     const event = { ...form };
     try {
-      const url = isNew ? "http://localhost:5050/events" : `http://localhost:5050/events/${params.id}`;
+      const url = isNew ? `${baseUrl}/events` : `${baseUrl}/events/${params.id}`;
       const method = isNew ? "POST" : "PATCH";
       const response = await fetch(url, {
         method,
@@ -142,12 +143,12 @@ export function PerformerForm() {
 
   useEffect(() => {
     async function fetchData() {
-      const hotelsRes = await fetch("http://localhost:5050/hotels");
+      const hotelsRes = await fetch(`${baseUrl}/hotels`);
       setHotels(await hotelsRes.json());
 
       if (params.id) {
         setIsNew(false);
-        const performerRes = await fetch(`http://localhost:5050/performers/${params.id}`);
+        const performerRes = await fetch(`${baseUrl}/performers/${params.id}`);
         const performer = await performerRes.json();
         setForm(performer);
       }
@@ -162,7 +163,7 @@ export function PerformerForm() {
   async function onSubmit(e) {
     e.preventDefault();
     try {
-      const url = isNew ? "http://localhost:5050/performers" : `http://localhost:5050/performers/${params.id}`;
+      const url = isNew ? `${baseUrl}/performers` : `${baseUrl}/performers/${params.id}`;
       const method = isNew ? "POST" : "PATCH";
       const response = await fetch(url, {
         method,
@@ -248,9 +249,9 @@ export function MovementForm() {
   useEffect(() => {
     async function fetchData() {
       const [performersRes, driversRes, vehiclesRes] = await Promise.all([
-        fetch("http://localhost:5050/performers"),
-        fetch("http://localhost:5050/drivers"),
-        fetch("http://localhost:5050/vehicles")
+        fetch(`${baseUrl}/performers`),
+        fetch(`${baseUrl}/drivers`),
+        fetch(`${baseUrl}/vehicles`)
       ]);
       setPerformers(await performersRes.json());
       setDrivers(await driversRes.json());
@@ -258,7 +259,7 @@ export function MovementForm() {
 
       if (params.id) {
         setIsNew(false);
-        const movementRes = await fetch(`http://localhost:5050/movements/${params.id}`);
+        const movementRes = await fetch(`${baseUrl}/movements/${params.id}`);
         const movement = await movementRes.json();
         setForm(movement);
       }
@@ -273,7 +274,7 @@ export function MovementForm() {
   async function onSubmit(e) {
     e.preventDefault();
     try {
-      const url = isNew ? "http://localhost:5050/movements" : `http://localhost:5050/movements/${params.id}`;
+      const url = isNew ? `${baseUrl}/movements` : `${baseUrl}/movements/${params.id}`;
       const method = isNew ? "POST" : "PATCH";
       const response = await fetch(url, {
         method,
@@ -396,12 +397,12 @@ export function DriverForm() {
   useEffect(() => {
     async function fetchData() {
       // Fetch available vehicles for assignment
-      const vehiclesRes = await fetch("http://localhost:5050/vehicles");
+      const vehiclesRes = await fetch(`${baseUrl}/vehicles`);
       setVehicles(await vehiclesRes.json());
 
       if (params.id) {
         setIsNew(false);
-        const driverRes = await fetch(`http://localhost:5050/drivers/${params.id}`);
+        const driverRes = await fetch(`${baseUrl}/drivers/${params.id}`);
         const driver = await driverRes.json();
         setForm(driver);
       }
@@ -416,7 +417,7 @@ export function DriverForm() {
   async function onSubmit(e) {
     e.preventDefault();
     try {
-      const url = isNew ? "http://localhost:5050/drivers" : `http://localhost:5050/drivers/${params.id}`;
+      const url = isNew ? `${baseUrl}/drivers` : `${baseUrl}/drivers/${params.id}`;
       const method = isNew ? "POST" : "PATCH";
       const response = await fetch(url, {
         method,
@@ -514,7 +515,7 @@ export function VehicleForm() {
     async function fetchData() {
       if (params.id) {
         setIsNew(false);
-        const response = await fetch(`http://localhost:5050/vehicles/${params.id}`);
+        const response = await fetch(`${baseUrl}/vehicles/${params.id}`);
         const vehicle = await response.json();
         setForm(vehicle);
       }
@@ -537,7 +538,7 @@ export function VehicleForm() {
   async function onSubmit(e) {
     e.preventDefault();
     try {
-      const url = isNew ? "http://localhost:5050/vehicles" : `http://localhost:5050/vehicles/${params.id}`;
+      const url = isNew ? `${baseUrl}/vehicles` : `${baseUrl}/vehicles/${params.id}`;
       const method = isNew ? "POST" : "PATCH";
       const response = await fetch(url, {
         method,
@@ -661,7 +662,7 @@ export function HotelForm() {
     async function fetchData() {
       if (params.id) {
         setIsNew(false);
-        const response = await fetch(`http://localhost:5050/hotels/${params.id}`);
+        const response = await fetch(`${baseUrl}/hotels/${params.id}`);
         const hotel = await response.json();
         setForm(hotel);
       }
@@ -690,7 +691,7 @@ export function HotelForm() {
   async function onSubmit(e) {
     e.preventDefault();
     try {
-      const url = isNew ? "http://localhost:5050/hotels" : `http://localhost:5050/hotels/${params.id}`;
+      const url = isNew ? `${baseUrl}/hotels` : `${baseUrl}/hotels/${params.id}`;
       const method = isNew ? "POST" : "PATCH";
       const response = await fetch(url, {
         method,
