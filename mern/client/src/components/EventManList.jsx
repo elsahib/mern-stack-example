@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
+const baseUrl = import.meta.env.VITE_BASE_URL;
+console.log(baseUrl);
 // Event List Component
 export function EventList() {
   const [events, setEvents] = useState([]);
@@ -8,7 +10,7 @@ export function EventList() {
 
   useEffect(() => {
     async function fetchEvents() {
-      const response = await fetch("http://localhost:5050/events");
+      const response = await fetch(`${baseUrl}/events`);
       const events = await response.json();
       setEvents(events);
     }
@@ -16,7 +18,7 @@ export function EventList() {
   }, []);
 
   async function deleteEvent(id) {
-    await fetch(`http://localhost:5050/events/${id}`, {
+    await fetch(`${baseUrl}/events/${id}`, {
       method: "DELETE",
     });
     setEvents(events.filter(event => event._id !== id));
@@ -165,7 +167,7 @@ export function MovementList() {
 
   useEffect(() => {
     async function fetchMovements() {
-      const response = await fetch("http://localhost:5050/movements");
+      const response = await fetch(`${baseUrl}/movements`);
       const movements = await response.json();
       setMovements(movements);
     }
@@ -173,7 +175,7 @@ export function MovementList() {
   }, []);
 
   async function deleteMovement(id) {
-    await fetch(`http://localhost:5050/movements/${id}`, {
+    await fetch(`${baseUrl}/movements/${id}`, {
       method: "DELETE",
     });
     setMovements(movements.filter(movement => movement._id !== id));
@@ -312,7 +314,7 @@ export function PerformerList() {
 
   useEffect(() => {
     async function fetchPerformers() {
-      const response = await fetch("http://localhost:5050/performers");
+      const response = await fetch(`${baseUrl}/performers`);
       const performers = await response.json();
       setPerformers(performers);
     }
@@ -320,7 +322,7 @@ export function PerformerList() {
   }, []);
 
   async function deletePerformer(id) {
-    await fetch(`http://localhost:5050/performers/${id}`, {
+    await fetch(`${baseUrl}/performers/${id}`, {
       method: "DELETE",
     });
     setPerformers(performers.filter(performer => performer._id !== id));
@@ -451,7 +453,7 @@ export function DriverList() {
 
   useEffect(() => {
     async function fetchDrivers() {
-      const response = await fetch("http://localhost:5050/drivers");
+      const response = await fetch(`${baseUrl}/drivers`);
       const drivers = await response.json();
       setDrivers(drivers);
     }
@@ -459,7 +461,7 @@ export function DriverList() {
   }, []);
 
   async function deleteDriver(id) {
-    await fetch(`http://localhost:5050/drivers/${id}`, {
+    await fetch(`${baseUrl}/drivers/${id}`, {
       method: "DELETE",
     });
     setEvents(events.filter(event => event._id !== id));
@@ -594,7 +596,7 @@ export function VehicleList() {
 
   useEffect(() => {
     async function fetchVehicles() {
-      const response = await fetch("http://localhost:5050/vehicles");
+      const response = await fetch(`${baseUrl}/vehicles`);
       const vehicles = await response.json();
       setVehicles(vehicles);
     }
@@ -602,7 +604,7 @@ export function VehicleList() {
   }, []);
 
   async function deleteVehicle(id) {
-    await fetch(`http://localhost:5050/vehicles/${id}`, {
+    await fetch(`${baseUrl}/vehicles/${id}`, {
       method: "DELETE",
     });
     setVehicles(vehicles.filter(vehicle => vehicle._id !== id));
@@ -734,7 +736,7 @@ export function HotelList() {
 
   useEffect(() => {
     async function fetchHotels() {
-      const response = await fetch("http://localhost:5050/hotels");
+      const response = await fetch(`${baseUrl}/hotels`);
       const hotels = await response.json();
       setHotels(hotels);
     }
@@ -742,7 +744,7 @@ export function HotelList() {
   }, []);
 
   async function deleteHotel(id) {
-    await fetch(`http://localhost:5050/hotels/${id}`, {
+    await fetch(`${baseUrl}/hotels/${id}`, {
       method: "DELETE",
     });
     setHotels(hotels.filter(hotel => hotel._id !== id));
