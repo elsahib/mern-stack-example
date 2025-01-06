@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 
 const baseUrl = import.meta.env.VITE_BASE_URL;
 console.log(baseUrl);
@@ -7,6 +8,7 @@ console.log(baseUrl);
 export function EventList() {
   const [events, setEvents] = useState([]);
   const [expandedRow, setExpandedRow] = useState(null);
+  const {t} = useTranslation();
 
   useEffect(() => {
     async function fetchEvents() {
@@ -160,6 +162,7 @@ export function EventList() {
 export function MovementList() {
   const [movements, setMovements] = useState([]);
   const [expandedRow, setExpandedRow] = useState(null);
+  const {t} = useTranslation();
 
   const formatDate = (dateString) => {
     return new Date(dateString).toLocaleString();
@@ -311,6 +314,7 @@ export function MovementList() {
 export function PerformerList() {
   const [performers, setPerformers] = useState([]);
   const [expandedRow, setExpandedRow] = useState(null);
+  const {t} = useTranslation();
 
   useEffect(() => {
     async function fetchPerformers() {
@@ -450,6 +454,7 @@ export function PerformerList() {
 export function DriverList() {
   const [drivers, setDrivers] = useState([]);
   const [expandedRow, setExpandedRow] = useState(null);
+  const {t} = useTranslation();
 
   useEffect(() => {
     async function fetchDrivers() {
@@ -593,6 +598,7 @@ export function DriverList() {
 export function VehicleList() {
   const [vehicles, setVehicles] = useState([]);
   const [expandedRow, setExpandedRow] = useState(null);
+  const {t} = useTranslation();
 
   useEffect(() => {
     async function fetchVehicles() {
@@ -733,6 +739,7 @@ export function VehicleList() {
 export function HotelList() {
   const [hotels, setHotels] = useState([]);
   const [expandedRow, setExpandedRow] = useState(null);
+  const {t} = useTranslation();
 
   useEffect(() => {
     async function fetchHotels() {

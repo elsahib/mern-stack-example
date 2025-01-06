@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 
 const baseUrl = import.meta.env.VITE_BASE_URL;
 // Event Form Component
@@ -16,6 +17,8 @@ export function EventForm() {
   const [isNew, setIsNew] = useState(true);
   const params = useParams();
   const navigate = useNavigate();
+  const {t} = useTranslation();
+
 
   useEffect(() => {
     // Fetch performers and locations for dropdown
@@ -140,6 +143,7 @@ export function PerformerForm() {
   const [isNew, setIsNew] = useState(true);
   const params = useParams();
   const navigate = useNavigate();
+  const {t} = useTranslation();
 
   useEffect(() => {
     async function fetchData() {
@@ -245,6 +249,7 @@ export function MovementForm() {
   const [isNew, setIsNew] = useState(true);
   const params = useParams();
   const navigate = useNavigate();
+  const {t} = useTranslation();
 
   useEffect(() => {
     async function fetchData() {
@@ -393,6 +398,7 @@ export function DriverForm() {
   const [isNew, setIsNew] = useState(true);
   const params = useParams();
   const navigate = useNavigate();
+  const {t} = useTranslation();
 
   useEffect(() => {
     async function fetchData() {
@@ -510,6 +516,7 @@ export function VehicleForm() {
   const [isNew, setIsNew] = useState(true);
   const params = useParams();
   const navigate = useNavigate();
+  const {t} = useTranslation();
 
   useEffect(() => {
     async function fetchData() {
@@ -657,6 +664,7 @@ export function HotelForm() {
   const [isNew, setIsNew] = useState(true);
   const params = useParams();
   const navigate = useNavigate();
+  const {t} = useTranslation();
 
   useEffect(() => {
     async function fetchData() {

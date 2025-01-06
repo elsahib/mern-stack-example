@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 export default function LoginForm() {
   const [isLogin, setIsLogin] = useState(true);
@@ -8,6 +9,7 @@ export default function LoginForm() {
     password: "",
   });
   const navigate = useNavigate();
+  const {t} = useTranslation();
 
   function updateForm(value) {
     return setForm((prev) => {

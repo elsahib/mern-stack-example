@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
+
 const baseUrl = import.meta.env.VITE_BASE_URL;
 
 
@@ -12,6 +14,8 @@ export default function Record() {
   const [isNew, setIsNew] = useState(true);
   const params = useParams();
   const navigate = useNavigate();
+  const {t} = useTranslation();
+
 
   useEffect(() => {
     async function fetchData() {

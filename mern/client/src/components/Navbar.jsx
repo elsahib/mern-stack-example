@@ -1,20 +1,24 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import LanguageSwitcher from './LanguageSwitcher';
+
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const {t} = useTranslation();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
 
   const navItems = [
-    { to: "/events", label: "Events" },
-    { to: "/performers", label: "Performers" },
-    { to: "/movements", label: "Transportation" },
-    { to: "/drivers", label: "Drivers" },
-    { to: "/vehicles", label: "Vehicles" },
-    { to: "/hotels", label: "Hotels" },
+    { to: "/events", label: t('menu.events') },
+    { to: "/performers", label: t('menu.performers') },
+    { to: "/movements", label: t('menu.transport') },
+    { to: "/drivers", label: t('menu.drivers') },
+    { to: "/vehicles", label: t('menu.vehicles') },
+    { to: "/hotels", label: t('menu.hotels') },
   ];
 
   return (
@@ -46,7 +50,7 @@ export default function Navbar() {
               >
                 {item.label}
               </NavLink>
-            ))}
+            ))}<LanguageSwitcher />
           </div>
 
           {/* Mobile menu button */}
@@ -110,7 +114,7 @@ export default function Navbar() {
             >
               {item.label}
             </NavLink>
-          ))}
+          ))} <LanguageSwitcher />
         </div>
       </div>
     </nav>

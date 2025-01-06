@@ -1,0 +1,58 @@
+{
+  "menu": {
+    "events": "الأحداث",
+    "performers": "المؤدون",
+    "transport": "النقل",
+    "hotels": "الفنادق",
+    "drivers": "السائقون",
+    "vehicles": "المركبات"
+  },
+
+  "description": "هذا تطبيق React ثنائي اللغة",
+  "events_title": "الأحداث",
+  "events_description": "قائمة الأحداث",
+  "events_table": {
+    "name": "الاسم",
+    "status": "الحالة",
+    "date": "التاريخ",
+    "location": "الموقع",
+    "actions": {"edit": "تعديل", "delete": "حذف"}
+  },
+  "event_status_note": "مجدول",
+  "performers_title": "المؤدون",
+  "performers_description": "قائمة المؤدين",
+  "performers_table": {
+    "name": "الاسم",
+    "hotel": "الفندق",
+    "requirements": "المتطلبات",
+    "actions": {"edit": "تعديل", "delete": "حذف"}
+  },
+  "transport_title": "النقل",
+  "transport_description": "قائمة النقل",
+  "transport_table": {
+    "performer": "المؤدي",
+    "driver": "السائق",
+    "vehicle": "المركبة",
+    "fromto": "من - إلى",
+    "time": "الوقت",
+    "actions": {"edit": "تعديل", "delete": "حذف"}
+  },
+  "drivers_title": "السائقون",
+  "drivers_description": "قائمة السائقين",
+  "drivers_table": {
+    "name": "الاسم",
+    "license": "الرخصة",
+    "ass_vehicle": "المركبة المخصصة",
+    "status":"الحالة",
+    "actions": {"edit": "تعديل", "delete": "حذف"}
+  },
+  "vehicles_title": "المركبات",
+  "vehicles_description": "قائمة المركبات",
+  "vehicles_table" : {
+    "model": "الطراز",
+    "license": "الرخصة",
+    "capacity": "السعة",
+    "status":"الحالة",
+    "actions": {"edit": "تعديل", "delete": "حذف"}
+  }
+}
