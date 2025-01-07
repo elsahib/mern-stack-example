@@ -7,52 +7,85 @@
     "drivers": "السائقون",
     "vehicles": "المركبات"
   },
-
   "description": "هذا تطبيق React ثنائي اللغة",
   "events_title": "الأحداث",
-  "events_description": "قائمة الأحداث",
+  "events_description": "إضافة حدث",
   "events_table": {
     "name": "الاسم",
     "status": "الحالة",
     "date": "التاريخ",
     "location": "الموقع",
-    "actions": {"edit": "تعديل", "delete": "حذف"}
+    "actions": {
+      "edit": "تعديل",
+      "delete": "حذف"
+    },
+    "actions_label": "تغيير"
   },
   "event_status_note": "مجدول",
   "performers_title": "المؤدون",
-  "performers_description": "قائمة المؤدين",
+  "performers_description": "إضافة مؤدي",
   "performers_table": {
     "name": "الاسم",
     "hotel": "الفندق",
     "requirements": "المتطلبات",
-    "actions": {"edit": "تعديل", "delete": "حذف"}
+    "actions": {
+      "edit": "تعديل",
+      "delete": "حذف"
+    },
+    "actions_label": "تغيير"
   },
   "transport_title": "النقل",
-  "transport_description": "قائمة النقل",
+  "transport_description": "إضافة عملية نقل",
   "transport_table": {
     "performer": "المؤدي",
     "driver": "السائق",
     "vehicle": "المركبة",
     "fromto": "من - إلى",
     "time": "الوقت",
-    "actions": {"edit": "تعديل", "delete": "حذف"}
+    "actions": {
+      "edit": "تعديل",
+      "delete": "حذف"
+    },
+    "actions_label": "تغيير"
   },
   "drivers_title": "السائقون",
-  "drivers_description": "قائمة السائقين",
+  "drivers_description": "إضافة سائق",
   "drivers_table": {
     "name": "الاسم",
     "license": "الرخصة",
     "ass_vehicle": "المركبة المخصصة",
-    "status":"الحالة",
-    "actions": {"edit": "تعديل", "delete": "حذف"}
+    "status": "الحالة",
+    "actions": {
+      "edit": "تعديل",
+      "delete": "حذف"
+    },
+    "actions_label": "تغيير"
   },
   "vehicles_title": "المركبات",
-  "vehicles_description": "قائمة المركبات",
-  "vehicles_table" : {
+  "vehicles_description": "إضافة مركبه",
+  "vehicles_table": {
     "model": "الطراز",
     "license": "الرخصة",
     "capacity": "السعة",
-    "status":"الحالة",
-    "actions": {"edit": "تعديل", "delete": "حذف"}
+    "status": "الحالة",
+    "actions": {
+      "edit": "تعديل",
+      "delete": "حذف"
+    },
+    "actions_label": "تغيير"
+  },
+  "hotels_title": "الفنادق",
+  "hotels_description": "إضافة فندق",
+  "hotels_table": {
+    "name": "الاسم",
+    "address": "العنوان",
+    "contact_person": "الشخص المسؤول",
+    "phone": "الهاتف",
+    "email": "البريد الإلكتروني",
+    "actions": {
+      "edit": "تعديل",
+      "delete": "حذف"
+    },
+    "actions_label": "الإجراءات"
   }
 }

@@ -10,13 +10,14 @@
 
     "description": "This is a dual language React app",
     "events_title": "Events",
-    "events_description": "List of events",
+    "events_description": "Create Event",
     "events_table": {
       "name": "Name",
       "status": "Status",
       "date": "Date",
       "location": "Location",
-      "actions": {"edit": "Edit", "delete": "Delete"}
+      "actions": {"edit": "Edit", "delete": "Delete"},
+      "actions_label": "Actions"
     },
     "event_status_note": "Scheduled",
     "performers_title": "Performers",
@@ -25,17 +26,20 @@
       "name": "Name",
       "hotel": "Hotel",
       "requirements": "Requirements",
-      "actions": {"edit": "Edit", "delete": "Delete"}
+      "actions": {"edit": "Edit", "delete": "Delete"},
+      "actions_label": "Actions"
+
     },
     "transport_title": "Transportation",
-    "transport_description": "List of transportation",
+    "transport_description": "Schedule Movement",
     "transport_table": {
       "performer": "Performer",
       "driver": "Driver",
       "vehicle": "Vehicle",
       "fromto": "From - To",
       "time": "Time",
-      "actions": {"edit": "Edit", "delete": "Delete"}
+      "actions": {"edit": "Edit", "delete": "Delete"},
+      "actions_label": "Actions"
     },
     "drivers_title": "Drivers",
     "drivers_description": "List of drivers",
@@ -44,7 +48,8 @@
       "license": "Licesne",
       "ass_vehicle": "Assigned Vehicle",
       "status":"Status",
-      "actions": {"edit": "Edit", "delete": "Delete"}
+      "actions": {"edit": "Edit", "delete": "Delete"},
+      "actions_label": "Actions"
     },
     "vehicles_title": "Vehicles",
     "vehicles_description": "List of Vehicles",
@@ -53,7 +58,18 @@
       "license": "Licesne",
       "capacity": "Capacity",
       "status":"Status",
-      "actions": {"edit": "Edit", "delete": "Delete"}
+      "actions": {"edit": "Edit", "delete": "Delete"},
+      "actions_label": "Actions"
+    },
+    "hotels_title": "Hotels",
+    "hotels_description": "Add Hotel",
+    "hotels_table": {
+      "name": "Name",
+      "address": "Address",
+      "contact_person": "Contact Person",
+      "phone": "Phone",
+      "email": "Email",
+      "actions": {"edit": "Edit", "delete": "Delete"},
+      "actions_label": "Actions"
     }
   }
-  

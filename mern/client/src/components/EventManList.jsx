@@ -29,12 +29,12 @@ export function EventList() {
   return (
     <div className="p-4">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-4">
-        <h3 className="text-lg font-semibold">Events</h3>
+        <h3 className="text-lg font-semibold">{t("events_title")}</h3>
         <Link
           to="/events/create"
           className="w-full sm:w-auto px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 text-center"
         >
-          Create Event
+          {t("events_description")}
         </Link>
       </div>
 
@@ -45,18 +45,18 @@ export function EventList() {
           <thead className="bg-gray-50">
             <tr>
               <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                Name
+              {t("events_table.name")}
               </th>
               <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                Date</th>
+              {t("events_table.date")}</th>
               <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                Location
+              {t("events_table.location")}
               </th>
               <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                Status
+              {t("events_table.status")}
               </th>
               <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                Actions
+              {t("events_table.actions_label")}
               </th>
             </tr>
           </thead>
@@ -73,13 +73,13 @@ export function EventList() {
                       to={`/events/edit/${event._id}`}
                       className="px-3 py-1 bg-blue-100 text-blue-600 rounded hover:bg-blue-200"
                     >
-                      Edit
+                      {t("events_table.actions.edit")}
                     </Link>
                     <button
                       onClick={() => deleteEvent(event._id)}
                       className="px-3 py-1 bg-red-100 text-red-600 rounded hover:bg-red-200"
                     >
-                      Delete
+                      {t("events_table.actions.delete")}
                     </button>
                   </div>
                 </td>
@@ -121,15 +121,15 @@ export function EventList() {
                   <div className="px-4 pb-4 space-y-2">
                     <div className="grid grid-cols-2 gap-2 text-sm">
                       <div>
-                        <p className="text-gray-500">Date</p>
+                        <p className="text-gray-500">{t("events_table.date")}</p>
                         <p>{new Date(event.date).toLocaleDateString()}</p>
                       </div>
                       <div>
-                        <p className="text-gray-500">Location</p>
+                        <p className="text-gray-500">{t("events_table.location")}</p>
                         <p>{event.location?.[0]?.name || 'N/A'}</p>
                       </div>
                       <div className="col-span-2">
-                        <p className="text-gray-500">Status</p>
+                        <p className="text-gray-500">{t("events_table.status")}</p>
                         <p>{event.status || 'N/A'}</p>
                       </div>
                     </div>
@@ -138,13 +138,13 @@ export function EventList() {
                         to={`/events/edit/${event._id}`}
                         className="flex-1 px-3 py-2 bg-blue-100 text-blue-600 rounded hover:bg-blue-200 text-center"
                       >
-                        Edit
+                        {t("events_table.actions.edit")}
                       </Link>
                       <button
                         onClick={() => deleteEvent(event._id)}
                         className="flex-1 px-3 py-2 bg-red-100 text-red-600 rounded hover:bg-red-200 text-center"
                       >
-                        Delete
+                        {t("events_table.actions.delete")}
                       </button>
                     </div>
                   </div>
@@ -188,12 +188,12 @@ export function MovementList() {
     <div className="p-4">
       {/* Header Section */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-4">
-        <h3 className="text-lg font-semibold">Transportation Schedule</h3>
+        <h3 className="text-lg font-semibold">{t("transtransport_title")}</h3>
         <Link
           to="/movements/create"
           className="w-full sm:w-auto px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 text-center"
         >
-          Schedule Movement
+          {t("transport_description")}
         </Link>
       </div>
 
@@ -202,12 +202,12 @@ export function MovementList() {
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
             <tr>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Performer</th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Driver</th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Vehicle</th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">From/To</th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Time</th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Actions</th>
+              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">{t("transport_table.performer")}</th>
+              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">{t("transport_table.driver")}</th>
+              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">{t("transport_table.vehicle")}</th>
+              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">{t("transport_table.fromto")}</th>
+              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">{t("transport_table.time")}</th>
+              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">{t("transport_table.actions_label")}</th>
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
@@ -224,13 +224,13 @@ export function MovementList() {
                       to={`/movements/edit/${movement._id}`}
                       className="px-3 py-1 bg-blue-100 text-blue-600 rounded hover:bg-blue-200"
                     >
-                      Edit
+                      {t("transport_table.actions.edit")}
                     </Link>
                     <button
                       onClick={() => deleteMovement(movement._id)}
                       className="px-3 py-1 bg-red-100 text-red-600 rounded hover:bg-red-200"
                     >
-                      Delete
+                      {t("transport_table.actions.delete")}
                     </button>
                   </div>
                 </td>
@@ -335,12 +335,12 @@ export function PerformerList() {
   return (
     <div className="p-4">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-4">
-        <h3 className="text-lg font-semibold">Performers</h3>
+        <h3 className="text-lg font-semibold">{t("performers_title")}</h3>
         <Link
           to="/performers/create"
           className="w-full sm:w-auto px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 text-center"
         >
-          Add Performer
+          {t("performers_description")}
         </Link>
       </div>
   
@@ -350,16 +350,16 @@ export function PerformerList() {
           <thead className="bg-gray-50">
             <tr>
               <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                Name
+                {t("performers_table.name")}
               </th>
               <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                Hotel
+                {t("performers_table.hotel")}
               </th>
               <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                Requirements
+                {t("performers_table.requirements")}
               </th>
               <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                Actions
+                {t("performers_table.actions_label")}
               </th>
             </tr>
           </thead>
@@ -375,14 +375,14 @@ export function PerformerList() {
                       to={`/performers/edit/${performer._id}`}
                       className="px-3 py-1 bg-blue-100 text-blue-600 rounded hover:bg-blue-200"
                     >
-                      Edit
+                      {t("performers_table.actions.edit")}
                     </Link>
                     <button
                       onClick={() => deletePerformer(performer._id)}
                       className="px-3 py-1 bg-red-100 text-red-600 rounded hover:bg-red-200"
                     >
-                      Delete
-                    </button>
+                   {t("performers_table.actions.delete")}
+                   </button>
                   </div>
                 </td>
               </tr>
@@ -431,13 +431,15 @@ export function PerformerList() {
                     to={`/performers/edit/${performer._id}`}
                     className="flex-1 px-3 py-2 bg-blue-100 text-blue-600 rounded hover:bg-blue-200 text-center"
                   >
-                    Edit
+                   {t("performers_table.actions.edit")}
+
                   </Link>
                   <button
                     onClick={() => deletePerformer(performer._id)}
                     className="flex-1 px-3 py-2 bg-red-100 text-red-600 rounded hover:bg-red-200 text-center"
                   >
-                    Delete
+                   {t("performers_table.actions.delete")}
+
                   </button>
                 </div>
               </div>
@@ -449,7 +451,6 @@ export function PerformerList() {
   );
   
 }
-
 
 export function DriverList() {
   const [drivers, setDrivers] = useState([]);
@@ -474,12 +475,12 @@ export function DriverList() {
   return (
     <div className="p-4">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-4">
-        <h3 className="text-lg font-semibold">Drivers</h3>
+        <h3 className="text-lg font-semibold">{t("drivers_title")}</h3>
         <Link
           to="/drivers/create"
           className="w-full sm:w-auto px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 text-center"
         >
-          Create Driver
+          {t("drivers_description")}
         </Link>
       </div>
   
@@ -489,19 +490,19 @@ export function DriverList() {
           <thead className="bg-gray-50">
             <tr>
               <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                Name
+                {t("drivers_table.name")}
               </th>
               <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                License
+                {t("drivers_table.license")}
               </th>
               <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                Assigned Vehicle
+                {t("drivers_table.ass_vehicle")}
               </th>
               <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                Status
+                {t("drivers_table.status")}
               </th>
               <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                Actions
+                {t("drivers_table.actions_label")}
               </th>
             </tr>
           </thead>
@@ -619,12 +620,12 @@ export function VehicleList() {
   return (
     <div className="p-4">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-4">
-        <h3 className="text-lg font-semibold">Vehicles</h3>
+        <h3 className="text-lg font-semibold">{t("vehicles_title")}</h3>
         <Link
           to="/vehicles/create"
           className="w-full sm:w-auto px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 text-center"
         >
-          Add Vehicle
+          {t("vehicles_description")}
         </Link>
       </div>
   
@@ -633,11 +634,21 @@ export function VehicleList() {
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
             <tr>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Model</th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Plate</th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Capacity</th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Actions</th>
+              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                {t("vehicles_table.model")}
+              </th>
+              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                {t("vehicles_table.license")}
+              </th>
+              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                {t("vehicles_table.capacity")}
+              </th>
+              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                {t("vehicles_table.status")}
+              </th>
+              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                {t("vehicles_table.actions_label")}
+              </th>
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
@@ -760,12 +771,12 @@ export function HotelList() {
   return (
     <div className="p-4">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-4">
-        <h3 className="text-lg font-semibold">Hotels</h3>
+        <h3 className="text-lg font-semibold">{t("hotels_title")}</h3>
         <Link
           to="/hotels/create"
           className="w-full sm:w-auto px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 text-center"
         >
-          Add Hotel
+          {t("hotels_description")}
         </Link>
       </div>
   
@@ -774,12 +785,24 @@ export function HotelList() {
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
             <tr>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Name</th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Address</th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Contact Info</th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Phone</th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Email</th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Actions</th>
+              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                {t("hotels_table.name")}
+              </th>
+              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                {t("hotels_table.address")}
+              </th>
+              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                {t("hotels_table.contact_person")}
+              </th>
+              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                {t("hotels_table.phone")}
+              </th>
+              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                {t("hotels_table.email")}
+              </th>
+              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                {t("hotels_table.actions_label")}
+              </th>
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
